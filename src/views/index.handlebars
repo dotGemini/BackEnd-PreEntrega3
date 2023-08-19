@@ -1,0 +1,27 @@
+<div>
+    <h1>Bienvenido! {{user.name}}</h1>
+    <li>
+        {{#if user.admin}}
+        Rol:
+        <input type="checkbox" checked disabled>Admin
+        <input type="checkbox" disabled>User
+        {{else}}
+        Rol:
+        <input type="checkbox" disabled>Admin
+        <input type="checkbox" checked disabled>User
+        {{/if}}
+        <a href="/api/sessions/logout"><button>Salir</button></a>
+    </li>
+
+    <h2>Lista de Productos</h2>
+    <div>
+        {{#each products}}
+        <img src={{this.url}} alt="Imagen">
+        <h2>{{this.title}}</h2>
+        <p>{{this.description}}</p>
+        <p>${{this.price}}</p>
+        <p>Stock: {{this.stock}}</p>
+        <p>Categoria: {{this.category}}</p>
+        {{/each}}
+    </div>
+</div>

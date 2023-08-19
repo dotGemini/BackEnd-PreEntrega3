@@ -1,0 +1,42 @@
+<div>
+    <h1>Bienvenido! {{user.name}}</h1>
+    <li>
+        {{#if user.admin}}
+        Rol:
+        <input type="checkbox" checked>Admin
+        <input type="checkbox" disabled>User
+        {{#else}}
+        Rol:
+        <input type="checkbox" checked disabled>User
+        <input type="checkbox" disabled>Admin
+        {{/if}}
+    </li>
+    <a href="/api/sessions/logout"><button>Salir</button></a>
+
+    <h2>Productos</h2>
+  
+    <div id="products-container">
+        {{#each allProds}}
+            <div class="product">
+                <h2>{{this.title}}</h2>
+                <p>{{this.category}}</p>
+                <p>{{this.stock}}</p>
+                <p>Precio: {{this.price}}</p>
+                <button class="add-to-cart" data-product-id="{{id}}">Agregar al carrito</button>
+            </div>
+        {{/each}}
+    </div>
+    
+    <div id="pagination">
+        {{#if paginate.hasPreviousPage}}
+            <button class="previous-page"><a href="/products?page={{paginate.prevPage}}">Página anterior</a></button>
+        {{/if}}
+        {{#if paginate.hasNextPage}}
+            <button class="next-page"><a href="/products?page={{paginate.nextPage}}">Página anterior</a></button>
+        {{/if}}
+    </div>
+
+    <script src="js/addProductToCart.js"></script>
+</div>
+
+<a href="/products?page={{productPaginate.prevPage}}">Página anterior</a>

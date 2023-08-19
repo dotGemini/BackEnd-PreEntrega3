@@ -1,0 +1,24 @@
+<div>
+
+    <h1>Bienvenido! {{user.name}}</h1>
+    <li>
+        {{#if user.admin}}
+        Rol:
+        <input type="checkbox" checked disabled>Admin
+        <input type="checkbox" disabled>User
+        {{#else}}
+        Rol:
+        <input type="checkbox" checked disabled>User
+        <input type="checkbox" disabled>Admin
+        {{/if}}
+    </li>
+    <a href="/api/sessions/logout"><button>Salir</button></a>
+    
+    <h2>Listado de </h2>
+    <div id="cardsContainer">
+
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>
