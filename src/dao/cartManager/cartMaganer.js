@@ -1,7 +1,7 @@
 import CartsModel from "../models/cartsModel.js";
 import ProductsModel from "../models/productsModel.js"
 
-class CartManager{
+export default class CartManager{
 
     constructor(){
         this.cartModel = CartsModel;
@@ -44,7 +44,7 @@ class CartManager{
                 throw new Error('Producto no encontrado');
             }
 
-            const existProduct = cart.products.find((item) => item.productId === productID);
+            const existProduct = cart.products.find((item) => item.productId._id.toString() === productID);
 
             if(existProduct) {
                 existProduct.quantity += 1;
@@ -56,7 +56,7 @@ class CartManager{
             return cart;
 
         } catch (error) {
-            throw new Error (`Fallo al obtener los datos: ${error.message}`);
+            throw new Error (`Fallo al obtener los datos`, error.message);
         }
     }
 

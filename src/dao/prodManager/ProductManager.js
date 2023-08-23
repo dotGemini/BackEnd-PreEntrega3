@@ -16,6 +16,7 @@ export default class ProductManager{
     }
 
     updateProduct = async(productID, updateFields) => {
+        console.log(updateFields)
         try {
             const {code, price, stock, url, ...otherFields} = updateFields;
 
@@ -25,27 +26,16 @@ export default class ProductManager{
                     throw new Error('Codigo ya utilizado')
                 }
             }
-
             const updateProduct = await this.productsModel.findByIdAndUpdate(
-                productID,
-                {
-                    $set: {
-                        ...otherFields,
-                        ...(code && {code}),
-                        ...(price && {price}),
-                        stock: stock !== undefined ? stock:0,
-                        ...(url && {url}),
-                    },
-                },
-                {new: true, runValidators: true}
+                productID, updateFields
             );
-
+            
             if(!updateProduct){
                 throw new Error('No encontrado')
             }
             return updateProduct;
         } catch (error) {
-            throw new Error(`${error.message}`)
+            throw new Error(error.message)
         }
     }
 
@@ -62,12 +52,14 @@ export default class ProductManager{
 
     getProducts = async (limit, page, sort, query) => {
         try {
+
             const products = await this.productsModel.paginate(
                 {query}, {
                     limit: limit || 5,
                     page : page || 1,
                     sort: sort === "asc" ? {price : 1} : sort === "desc" ? {price: -1} : undefined,
             });
+
             return products;
         } catch (error) {
             throw new Error(`Error: ${error.message}`);

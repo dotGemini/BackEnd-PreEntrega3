@@ -24,28 +24,28 @@ const productsSchema = new Schema({
             },
             message: 'El codigo ya esta usado'
         },
-        price: {
-            type: Number,
-            required: true,
-            min: [0, 'No puede ser negativo']
-        },
-        status: {
-            type: Boolean,
-            default: true,
-        },
-        stock: {
-            type: Number,
-            required: true,
-            min: [0, 'No puede ser negativo']
-        },
-        category: {
-            type:String,
-            required: true
-        },
-        url: {
-            type: [String],
-            default: []
-        }
+    },
+    price: {
+        type: Number,
+        required: true,
+        min: [0, 'No puede ser negativo']
+    },
+    status: {
+        type: Boolean,
+        default: true,
+    },
+    stock: {
+        type: Number,
+        required: true,
+        min: [0, 'No puede ser negativo']
+    },
+    category: {
+        type:String,
+        required: true
+    },
+    url: {
+        type: [String],
+        default: []
     }
 });
 

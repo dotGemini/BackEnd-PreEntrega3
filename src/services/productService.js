@@ -10,7 +10,8 @@ export class ProductsService {
     }
 
     async getProductByID(id) {
-        return await this.prodDao.getProductByID(id);
+        const prodID = await this.prodDao.getProductByID(id)
+        return prodID;
     }
 
     async addProduct(body) {

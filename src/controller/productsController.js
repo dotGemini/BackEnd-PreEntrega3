@@ -2,32 +2,33 @@ import { ProductsService } from "../services/productService.js"
 
 const prodService = new ProductsService();
 
-export const getProducts = (req, res) =>{
+export const getProducts = async (req, res) =>{
     const {limit} = parseInt(req.query);
     const page = req.query.page;
     const sort = req.query.sort;
     const query = req.query.query;
-    const prod = prodService.getProducts(limit, page, sort, query);
-    res.send({status:1, products: prod});
+    const prod = await prodService.getProducts(limit, page, sort, query);
+    res.send(prod);
 } 
 
-export const getProductByID = (req, res) => {
+export const getProductByID = async (req, res) => {
     const prodID = req.params.pid
-    const prod = prodService.getProductByID(prodID);
+    const prod = await prodService.getProductByID(prodID);
+    console.log(prod)
     res.send(prod);
 }
 
-export const addProduct = (req, res) => {
-    res.send(prodService.addProduct(req.body));
+export const addProduct = async (req, res) => {
+    res.send(await prodService.addProduct(req.body));
 }
 
-export const updateProduct = (req, res) => {
+export const updateProduct = async (req, res) => {
     const prodID = req.params.pid;
     const newObject = req.body;
 
-    res.send(prodService.updateProduct(prodID, newObject));
+    res.send(await prodService.updateProduct(prodID, newObject));
 }
 
-export const deleteProduct = (req, res) => {
-    res.send(prodService.deleteProduct(req.params.pid))
+export const deleteProduct = async (req, res) => {
+    res.send(await prodService.deleteProduct(req.params.pid))
 }

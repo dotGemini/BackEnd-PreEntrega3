@@ -3,7 +3,6 @@ import GitHubStrategy from 'passport-github2';
 import { createHash, isValidPassword } from '../utils.js';
 import local from 'passport-local';
 import userModel from '../dao/models/usersModel.js';
-import { default as token} from 'jsonwebtoken';
 import jwt from 'passport-jwt';
 import UserDTO from '../dto/userDTO.js';
 
@@ -11,8 +10,6 @@ const JWTStrategy = jwt.Strategy;
 const ExtractJWT = jwt.ExtractJwt;
 const LocalStrategy = local.Strategy;
 const PRIVATE_KEY = "CoderKeyFeliz";
-
-export const generateToken = user => token.sign({ user }, PRIVATE_KEY, { expiresIn: '1d' })
 
 const initializePassport = () => {
     passport.use('github', new GitHubStrategy({
@@ -66,7 +63,6 @@ const initializePassport = () => {
             if (!user) return done(null, false, { message: "User not found" });
             if (!isValidPassword(user, password)) return done(null, false);
             const { password: pass, ...userNoPass} = user._doc;
-            const jwt = generateToken(userNoPass);
             return done(null, userNoPass);
         } catch (error) {
             return done({ message: "Error logging in" });
@@ -100,8 +96,9 @@ const initializePassport = () => {
     });
 };
 
-const cookieExtractor = (req) => {
+export const cookieExtractor = (req) => {
     let token = null;
+    console.log("req.cookies", req.cookies)
     if (req && req.cookies) {
         token = req.cookies['coderCookieToken'];
     }

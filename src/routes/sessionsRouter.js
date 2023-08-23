@@ -22,7 +22,7 @@ router.post('/login', passport.authenticate('login', { failureRedirect: '/faillo
     }
     
     const token = jwt.sign(req.user, "CoderKeyFeliz", {expiresIn: "24h"});
-    res.cookie('coderCookieToken', token, { httpOnly: true }).send({ status: "success", payload: req.session.user, message: "¡Primer logueo realizado! :)" });
+    res.cookie('coderCookieToken', token, { httpOnly: true }).send({ status: "success", payload: req.session.user, message: "asd" });
 })
 
 router.get('/logout', (req, res) => {

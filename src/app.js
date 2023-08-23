@@ -13,7 +13,7 @@ import { productsUpdated, chat  } from './utils/socketUtils.js';
 import sessionsRouter from './routes/sessionsRouter.js'
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
-import config from './config.js';
+import config from './config/config.js';
 
 
 const app = express();
